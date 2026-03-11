@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const lang = searchParams.get('lang') || 'en';
   
   const folder = lang === 'ko' ? 'Kor' : 'Eng';
-  const newsDir = path.join(process.cwd(), 'project', 'News', folder);
+  const newsDir = path.join(process.cwd(), 'News', folder);
   
   try {
     if (!fs.existsSync(newsDir)) {

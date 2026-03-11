@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 // import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import LanguageGate from "@/components/LanguageGate";
@@ -35,7 +36,7 @@ export default function Home() {
       const res = await fetch(`/api/news?lang=${currentLocale}`);
       if (res.ok) {
         const data = await res.json();
-        setNewsList(data);
+        setNewsList(data.slice(0, 2));
       }
     } catch (e) {
       console.error(e);
@@ -225,15 +226,22 @@ export default function Home() {
                     <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.news.title}</h2>
                     <div className="space-y-6">
                       {newsList.length > 0 ? (
-                        newsList.map((news) => (
-                          <div key={news.id} className="relative pl-8 py-2 group cursor-pointer hover:bg-emerald-950/20 rounded-lg transition-colors">
-                            <div className="absolute left-2 top-[1.1rem] w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 group-hover:bg-emerald-400 group-hover:shadow-[0_0_8px_rgba(52,211,153,0.8)] transition-all flex items-center justify-center">
-                              <div className="w-1 h-1 bg-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            </div>
-                            <div className="text-xs text-emerald-500/70 font-mono mb-1">{news.date}</div>
-                            <h3 className="text-[15px] font-semibold text-neutral-300 group-hover:text-emerald-300 transition-colors leading-relaxed">{news.title}</h3>
+                        <>
+                          {newsList.map((news) => (
+                            <Link href={`/news/${news.id}`} key={news.id} className="block relative pl-8 py-2 group cursor-pointer hover:bg-emerald-950/20 rounded-lg transition-colors">
+                              <div className="absolute left-2 top-[1.1rem] w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 group-hover:bg-emerald-400 group-hover:shadow-[0_0_8px_rgba(52,211,153,0.8)] transition-all flex items-center justify-center">
+                                <div className="w-1 h-1 bg-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                              </div>
+                              <div className="text-xs text-emerald-500/70 font-mono mb-1">{news.date}</div>
+                              <h3 className="text-[15px] font-semibold text-neutral-300 group-hover:text-emerald-300 transition-colors leading-relaxed">{news.title}</h3>
+                            </Link>
+                          ))}
+                          <div className="pt-4 flex justify-end">
+                            <Link href="/news" className="text-xs font-mono text-emerald-500/70 hover:text-emerald-400 uppercase tracking-widest transition-colors flex items-center gap-2">
+                              View All <span>→</span>
+                            </Link>
                           </div>
-                        ))
+                        </>
                       ) : (
                         <p className="text-sm text-neutral-500 italic">{t.news.empty}</p>
                       )}
