@@ -2,6 +2,7 @@ export const en = {
   nav: {
     accessLevel: "Access Level:",
     identityVerified: "Identity Verified",
+    toggleLang: "KR",
   },
   hero: {
     tagline: "// Security Engineering @ UNSW",
@@ -28,6 +29,17 @@ export const en = {
     title: "Certifications",
     cert1: "AWS Security Specialty",
     target1: "Target 2024"
+  },
+  projects: {
+    title: "Projects",
+    list: [
+      { name: "Zero Trust Network Access (ZTNA)", description: "Next-generation access control system for enterprise environments.", status: "Active" },
+      { name: "Cloud Security Posture Management", description: "Automated vulnerability diagnosis pipeline for AWS/GCP.", status: "Completed" }
+    ]
+  },
+  news: {
+    title: "Security News",
+    empty: "No updates available."
   },
   footer: "ENCRYPTED CONNECTION : 256-BIT AES"
 };
