@@ -22,24 +22,17 @@ export const en = {
   },
   education: {
     title: "Education",
-    school: "UNSW Sydney",
-    degree: "Advanced Computer Science"
   },
   certifications: {
     title: "Certifications",
-    cert1: "AWS Security Specialty",
-    target1: "Target 2024"
   },
   projects: {
     title: "Projects",
-    list: [
-      { name: "Zero Trust Network Access (ZTNA)", description: "Next-generation access control system for enterprise environments.", status: "Active" },
-      { name: "Cloud Security Posture Management", description: "Automated vulnerability diagnosis pipeline for AWS/GCP.", status: "Completed" }
-    ]
   },
   news: {
     title: "Security News",
-    empty: "No updates available."
+    empty: "No updates available.",
+    viewAll: "View All News \u2192"
   },
   footer: "ENCRYPTED CONNECTION : 256-BIT AES"
 };

@@ -22,24 +22,17 @@ export const ko = {
   },
   education: {
     title: "Education",
-    school: "UNSW Sydney",
-    degree: "Advanced Computer Science"
   },
   certifications: {
     title: "Certifications",
-    cert1: "AWS Security Specialty",
-    target1: "Target 2024"
   },
   projects: {
     title: "Projects",
-    list: [
-      { name: "Zero Trust Network Access (ZTNA)", description: "엔터프라이즈 환경을 위한 차세대 접근 제어 시스템", status: "Active" },
-      { name: "Cloud Security Posture Management", description: "AWS/GCP 환경의 보안 취약점 자동 진단 파이프라인", status: "Completed" }
-    ]
   },
   news: {
     title: "Security News",
-    empty: "새로운 소식이 없습니다."
+    empty: "새로운 소식이 없습니다.",
+    viewAll: "View All News \u2192"
   },
   footer: "ENCRYPTED CONNECTION : 256-BIT AES"
 };

@@ -7,6 +7,8 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import LanguageGate from "@/components/LanguageGate";
 import { ko } from "@/locales/ko";
 import { en } from "@/locales/en";
+import { educationDataKo, certDataKo, projectDataKo } from "@/data/ko";
+import { educationDataEn, certDataEn, projectDataEn } from "@/data/en";
 
 interface NewsItem {
   id: string;
@@ -63,6 +65,9 @@ export default function Home() {
   if (isInitializing) return null;
 
   const t = locale === "ko" ? ko : en;
+  const eduData = locale === "ko" ? educationDataKo : educationDataEn;
+  const certData = locale === "ko" ? certDataKo : certDataEn;
+  const projData = locale === "ko" ? projectDataKo : projectDataEn;
 
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -175,94 +180,154 @@ export default function Home() {
                 </div>
               </motion.section>
 
-              {/* 4. Projects, News & Education */}
-              <div className="grid md:grid-cols-2 gap-20 mb-20">
+              {/* 4. Sections Container */}
+              <div className="flex flex-col gap-32 mb-20">
                 
-                {/* Left Column: Projects & Education */}
-                <div className="space-y-20">
-                  <motion.section
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={sectionVariants}
-                  >
-                    <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.projects.title}</h2>
-                    <div className="space-y-6">
-                      {t.projects.list.map((proj, idx) => (
-                        <div key={idx} className="bg-neutral-900/40 border border-neutral-800 p-6 rounded-lg border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/30 transition-all hover:translate-x-1 group">
-                          <div className="flex justify-between items-start mb-3">
-                            <h3 className="font-sans font-semibold text-neutral-200 group-hover:text-emerald-400 transition-colors">{proj.name}</h3>
-                            <span className="text-[10px] font-mono text-emerald-500/50 uppercase whitespace-nowrap ml-2">{proj.status}</span>
-                          </div>
-                          <p className="font-sans text-[14px] text-neutral-400 leading-relaxed">{proj.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.section>
-
-                  <motion.section
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={sectionVariants}
-                  >
-                    <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.education.title}</h2>
-                    <div className="border-l border-emerald-500/30 pl-6 relative">
-                      <div className="absolute -left-[4.5px] top-0 w-2 h-2 rounded-full bg-emerald-500"></div>
-                      <h3 className="text-lg font-bold text-white uppercase tracking-tighter">{t.education.school}</h3>
-                      <p className="text-sm text-emerald-500 font-mono mb-2">{t.education.degree}</p>
-                    </div>
-                  </motion.section>
-                </div>
-
-                {/* Right Column: News & Certifications */}
-                <div className="space-y-20">
-                  <motion.section
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={sectionVariants}
-                  >
-                    <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.news.title}</h2>
-                    <div className="space-y-6">
-                      {newsList.length > 0 ? (
-                        <>
-                          {newsList.map((news) => (
-                            <Link href={`/news/${news.id}`} key={news.id} className="block relative pl-8 py-2 group cursor-pointer hover:bg-emerald-950/20 rounded-lg transition-colors">
-                              <div className="absolute left-2 top-[1.1rem] w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 group-hover:bg-emerald-400 group-hover:shadow-[0_0_8px_rgba(52,211,153,0.8)] transition-all flex items-center justify-center">
-                                <div className="w-1 h-1 bg-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                              </div>
-                              <div className="text-xs text-emerald-500/70 font-mono mb-1">{news.date}</div>
-                              <h3 className="text-[15px] font-semibold text-neutral-300 group-hover:text-emerald-300 transition-colors leading-relaxed">{news.title}</h3>
-                            </Link>
-                          ))}
-                          <div className="pt-4 flex justify-end">
-                            <Link href="/news" className="text-xs font-mono text-emerald-500/70 hover:text-emerald-400 uppercase tracking-widest transition-colors flex items-center gap-2">
-                              View All <span>→</span>
-                            </Link>
-                          </div>
-                        </>
-                      ) : (
-                        <p className="text-sm text-neutral-500 italic">{t.news.empty}</p>
-                      )}
-                    </div>
-                  </motion.section>
-
-                  <motion.section
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={sectionVariants}
-                  >
-                    <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.certifications.title}</h2>
-                    <div className="space-y-4">
-                      <div className="bg-neutral-900/40 border border-neutral-800 p-5 rounded-lg flex justify-between items-center border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/30 transition-colors">
-                        <span className="font-sans text-sm font-semibold text-neutral-200 uppercase tracking-tight">{t.certifications.cert1}</span>
-                        <span className="text-[10px] font-mono text-emerald-500/50">{t.certifications.target1}</span>
+                {/* 4-1. Education (Vertical Timeline) */}
+                <motion.section
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={sectionVariants}
+                >
+                  <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
+                    {t.education.title}
+                  </h2>
+                  <div className="relative border-l border-emerald-500/30 ml-3 pl-8 py-2 space-y-12">
+                    {eduData.map((edu, idx) => (
+                      <div key={idx} className="relative group">
+                        {/* Timeline dot */}
+                        <div className="absolute -left-[37px] top-1.5 w-3 h-3 rounded-full bg-[#050505] border-2 border-emerald-500 group-hover:bg-emerald-500 transition-colors shadow-[0_0_10px_rgba(52,211,153,0.3)]"></div>
+                        <div className="text-sm font-mono text-emerald-500 mb-2">{edu.date}</div>
+                        <h3 className="text-xl font-bold font-sans text-white tracking-tight mb-1">{edu.school}</h3>
+                        <p className="text-base text-neutral-300 font-sans mb-3">{edu.major}</p>
+                        <p className="text-sm text-neutral-500 font-sans leading-relaxed">{edu.description}</p>
                       </div>
-                    </div>
-                  </motion.section>
-                </div>
+                    ))}
+                  </div>
+                </motion.section>
+
+                {/* 4-2. Certifications (3x2 Grid) */}
+                <motion.section
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={sectionVariants}
+                >
+                  <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
+                    {t.certifications.title}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {certData.map((cert, idx) => (
+                      <div key={idx} className="bg-neutral-900/40 border border-emerald-800/30 p-6 rounded-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] hover:border-emerald-500/50 transition-all group flex flex-col h-full">
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-10 h-10 rounded bg-[#050505] border border-neutral-800 flex items-center justify-center font-mono text-[10px] text-neutral-500 group-hover:text-emerald-400 group-hover:border-emerald-500/50 transition-colors">
+                            {cert.logo}
+                          </div>
+                          <span className="text-xs font-mono text-emerald-500/70">{cert.date}</span>
+                        </div>
+                        <h3 className="text-lg font-bold font-sans text-neutral-200 mb-2 group-hover:text-white transition-colors">{cert.name}</h3>
+                        <p className="text-xs text-neutral-400 font-mono mb-3 uppercase tracking-wider">{cert.issuer}</p>
+                        <p className="text-sm text-neutral-500 mt-auto leading-relaxed">{cert.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </motion.section>
+
+                {/* 4-3. Projects (Featured Card Layout) */}
+                <motion.section
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.1 }}
+                  variants={sectionVariants}
+                >
+                  <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
+                    {t.projects.title}
+                  </h2>
+                  <div className="space-y-16">
+                    {projData.map((proj, idx) => (
+                      <div key={idx} className="grid md:grid-cols-12 gap-8 items-center group">
+                        
+                        {/* Thumbnail */}
+                        <div className="md:col-span-5 relative h-64 md:h-full min-h-[250px] bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 group-hover:border-emerald-500/30 transition-colors flex items-center justify-center">
+                          <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <span className="text-neutral-600 font-mono text-sm tracking-widest">{proj.thumbnail}</span>
+                        </div>
+
+                        {/* Detail */}
+                        <div className="md:col-span-7 flex flex-col justify-center">
+                          <h3 className="text-2xl font-bold font-sans text-white mb-4 group-hover:text-emerald-400 transition-colors">{proj.title}</h3>
+                          
+                          <ul className="space-y-3 mb-6">
+                            {proj.achievements.map((ach, achIdx) => (
+                              <li key={achIdx} className="flex items-start text-sm text-neutral-300 font-sans leading-relaxed">
+                                <span className="text-emerald-500 mr-3 mt-1 text-xs">▹</span>
+                                <span>{ach}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          <div className="flex flex-wrap gap-2 mb-8">
+                            {proj.techStack.map((tech, techIdx) => (
+                              <span key={techIdx} className="px-2 py-1 text-[11px] font-mono text-emerald-400 bg-emerald-400/10 rounded-sm">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="flex items-center gap-4">
+                            <a href={proj.githubUrl} className="text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+                              GitHub ↗
+                            </a>
+                            <a href={proj.demoUrl} className="text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+                              Live Demo ↗
+                            </a>
+                          </div>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                </motion.section>
+
+                {/* 4-4. News (Minimalist List Style) */}
+                <motion.section
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={sectionVariants}
+                >
+                  <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">
+                    {t.news.title}
+                  </h2>
+                  <div className="border-t border-neutral-800">
+                    {newsList.length > 0 ? (
+                      <>
+                        {newsList.map((news) => (
+                          <Link href={`/news/${news.id}`} key={news.id} className="group flex flex-col md:flex-row md:items-center py-6 border-b border-neutral-800 hover:bg-[#0a0a0a] transition-colors px-2 -mx-2">
+                            <div className="text-sm font-mono text-emerald-500 w-36 shrink-0 mb-2 md:mb-0 transition-opacity opacity-80 group-hover:opacity-100">
+                              {news.date}
+                            </div>
+                            <h3 className="text-lg font-sans font-medium text-neutral-200 group-hover:text-emerald-400 transition-colors relative inline-block">
+                              <span className="relative z-10">{news.title}</span>
+                              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
+                            </h3>
+                          </Link>
+                        ))}
+                        <div className="pt-8">
+                          <Link href="/news" className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-wider">
+                            {t.news.viewAll} 
+                            <span className="text-lg leading-none transform group-hover:translate-x-1 transition-transform">→</span>
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="py-6 border-b border-neutral-800 text-sm text-neutral-500 italic font-sans flex items-center h-full">
+                        {t.news.empty}
+                      </div>
+                    )}
+                  </div>
+                </motion.section>
 
               </div>
             </main>
