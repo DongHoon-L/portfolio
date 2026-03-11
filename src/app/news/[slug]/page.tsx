@@ -1,26 +1,29 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NewsDetail {
   id: string;
   title: string;
   date: string;
   content: string;
+  translationSlug?: string | null;
 }
 
 export default function NewsDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const slug = params.slug as string;
   const [locale, setLocale] = useState<"ko" | "en">("en");
   const [news, setNews] = useState<NewsDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("preferredLanguage");
@@ -54,13 +57,34 @@ export default function NewsDetailPage() {
 
   const handleToggle = () => {
     const newLang = locale === "ko" ? "en" : "ko";
-    localStorage.setItem("preferredLanguage", newLang);
-    localStorage.setItem("preferredLanguageTime", new Date().getTime().toString());
-    setLocale(newLang);
+    
+    if (news && news.translationSlug) {
+      localStorage.setItem("preferredLanguage", newLang);
+      localStorage.setItem("preferredLanguageTime", new Date().getTime().toString());
+      setLocale(newLang);
+      router.push(`/news/${news.translationSlug}`);
+    } else {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#eee] relative overflow-hidden">
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-[#0f0f0f]/90 border border-neutral-800 text-emerald-400 font-sans text-sm px-5 py-3 rounded-lg shadow-2xl backdrop-blur-md flex items-center gap-3"
+          >
+            <span className="w-2 h-2 rounded-full bg-red-500/80 animate-pulse"></span>
+            {locale === "ko" ? "해당 언어의 번역본이 아직 준비되지 않았습니다." : "Translation for this language is not yet available."}
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Background Grid */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_2px,transparent_2px),linear-gradient(90deg,rgba(16,185,129,0.03)_2px,transparent_2px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_20%,transparent_100%)]"></div>
