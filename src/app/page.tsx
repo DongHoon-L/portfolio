@@ -98,10 +98,10 @@ export default function Home() {
             </div>
 
             {/* 1. 상단 상태 바 */}
-            <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-emerald-500/20 p-2">
+            <nav className="fixed top-0 w-full z-50 bg-[#050505]/60 backdrop-blur-xl border-b border-neutral-800 p-3 transition-all duration-300">
               <div className="max-w-5xl mx-auto flex justify-between items-center text-[10px] tracking-[0.2em] font-mono uppercase text-emerald-400">
                 <div>{t.nav.accessLevel} <span className="text-white">UNSW_ADV_STUDENT</span></div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-6">
                   <div className="hidden sm:flex items-center gap-2">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -111,9 +111,10 @@ export default function Home() {
                   </div>
                   <button 
                     onClick={handleManualToggle}
-                    className="border border-emerald-500/50 px-2 py-1 rounded bg-emerald-950/30 hover:bg-emerald-500/20 transition-colors text-white"
+                    className="border border-neutral-800 bg-neutral-900/50 hover:border-emerald-500/50 px-3 py-1.5 rounded-sm transition-all text-neutral-400 hover:text-emerald-400 uppercase tracking-widest flex items-center gap-2"
                   >
-                    {t.nav.toggleLang}
+                    {locale === "ko" ? "EN" : "KR"} 
+                    <span className="text-[8px] opacity-50">/ Switch</span>
                   </button>
                 </div>
               </div>
@@ -127,14 +128,14 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="grid md:grid-cols-2 gap-12 items-center mb-24"
+                className="grid md:grid-cols-2 gap-12 items-center mb-32"
               >
                 <div className="order-2 md:order-1">
                   <p className="font-mono text-emerald-500 text-sm mb-4 tracking-tight">{t.hero.tagline}</p>
-                  <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter leading-tight mb-6">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight mb-6 font-sans">
                     {t.hero.title.part1}<span className="text-neutral-500">{t.hero.title.highlight1}</span>{t.hero.title.part2}<span className="text-emerald-500">{t.hero.title.highlight2}</span>{t.hero.title.part3}
                   </h1>
-                  <p className="text-lg text-neutral-400 leading-relaxed mb-8 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: t.hero.description.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
+                  <p className="font-sans text-lg text-neutral-400 leading-relaxed mb-8 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: t.hero.description.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
                 </div>
                 
                 <div className="order-1 md:order-2 relative group">
@@ -151,11 +152,11 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-32"
+                className="mb-40"
               >
-                <div className="bg-[#0f0f0f]/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl relative">
+                <div className="bg-[#0f0f0f]/80 backdrop-blur-xl border border-neutral-800 rounded-xl overflow-hidden shadow-2xl relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
-                  <div className="bg-neutral-800/50 px-4 py-2 border-b border-white/5 flex items-center gap-2">
+                  <div className="bg-neutral-800/30 px-4 py-2 border-b border-neutral-800 flex items-center gap-2">
                     <div className="flex gap-1.5">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/40"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-amber-500/20 border border-amber-500/40"></div>
@@ -163,21 +164,21 @@ export default function Home() {
                     </div>
                     <span className="text-[10px] font-mono text-neutral-500 ml-2 italic">{t.terminal.title}</span>
                   </div>
-                  <div className="p-8 font-mono text-sm space-y-4">
-                    <div className="flex gap-3 text-emerald-500">
+                  <div className="p-8 text-sm space-y-4">
+                    <div className="flex gap-3 text-emerald-500 font-mono">
                       <span>➜</span>
                       <span className="text-white">{t.terminal.command}</span>
                     </div>
-                    <div className="text-neutral-400 ml-6 leading-7 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: t.terminal.output.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
+                    <div className="text-neutral-400 ml-6 leading-8 font-sans text-[15px]" dangerouslySetInnerHTML={{ __html: t.terminal.output.replace(/\*\*(.*?)\*\*/g, '<strong class="text-emerald-400 font-medium">$1</strong>') }} />
                   </div>
                 </div>
               </motion.section>
 
               {/* 4. Projects, News & Education */}
-              <div className="grid md:grid-cols-2 gap-16 mb-16">
+              <div className="grid md:grid-cols-2 gap-20 mb-20">
                 
                 {/* Left Column: Projects & Education */}
-                <div className="space-y-16">
+                <div className="space-y-20">
                   <motion.section
                     initial="hidden"
                     whileInView="visible"
@@ -187,12 +188,12 @@ export default function Home() {
                     <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.projects.title}</h2>
                     <div className="space-y-6">
                       {t.projects.list.map((proj, idx) => (
-                        <div key={idx} className="bg-neutral-900/40 border border-white/10 p-5 rounded-lg border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/50 transition-all hover:translate-x-1 group">
-                          <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors">{proj.name}</h3>
-                            <span className="text-[10px] font-mono text-emerald-500/50 uppercase">{proj.status}</span>
+                        <div key={idx} className="bg-neutral-900/40 border border-neutral-800 p-6 rounded-lg border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/30 transition-all hover:translate-x-1 group">
+                          <div className="flex justify-between items-start mb-3">
+                            <h3 className="font-sans font-semibold text-neutral-200 group-hover:text-emerald-400 transition-colors">{proj.name}</h3>
+                            <span className="text-[10px] font-mono text-emerald-500/50 uppercase whitespace-nowrap ml-2">{proj.status}</span>
                           </div>
-                          <p className="text-sm text-neutral-400">{proj.description}</p>
+                          <p className="font-sans text-[14px] text-neutral-400 leading-relaxed">{proj.description}</p>
                         </div>
                       ))}
                     </div>
@@ -214,7 +215,7 @@ export default function Home() {
                 </div>
 
                 {/* Right Column: News & Certifications */}
-                <div className="space-y-16">
+                <div className="space-y-20">
                   <motion.section
                     initial="hidden"
                     whileInView="visible"
@@ -247,8 +248,8 @@ export default function Home() {
                   >
                     <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">{t.certifications.title}</h2>
                     <div className="space-y-4">
-                      <div className="bg-neutral-900/40 border border-white/10 p-4 rounded-lg flex justify-between items-center border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/50 transition-colors">
-                        <span className="text-sm font-bold uppercase tracking-tight">{t.certifications.cert1}</span>
+                      <div className="bg-neutral-900/40 border border-neutral-800 p-5 rounded-lg flex justify-between items-center border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/30 transition-colors">
+                        <span className="font-sans text-sm font-semibold text-neutral-200 uppercase tracking-tight">{t.certifications.cert1}</span>
                         <span className="text-[10px] font-mono text-emerald-500/50">{t.certifications.target1}</span>
                       </div>
                     </div>

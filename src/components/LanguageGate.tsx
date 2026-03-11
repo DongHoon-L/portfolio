@@ -9,79 +9,59 @@ interface LanguageGateProps {
 export default function LanguageGate({ onSelectLanguage }: LanguageGateProps) {
   return (
     <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -50, filter: "blur(10px)", transition: { duration: 0.8, ease: "easeInOut" } }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505] text-emerald-400 font-mono overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.6, ease: "easeOut" } }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505] text-emerald-500 font-mono tracking-wide"
     >
-      {/* Background Grid & Glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.05)_2px,transparent_2px),linear-gradient(90deg,rgba(16,185,129,0.05)_2px,transparent_2px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_100%)]"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 blur-[150px] rounded-full"></div>
+      {/* Subtle Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(52,211,153,0.05)_0%,transparent_60%)]"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md p-8 bg-black/60 backdrop-blur-md border border-emerald-500/30 rounded-lg shadow-[0_0_30px_rgba(16,185,129,0.15)]">
-        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-emerald-500/30">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/50 border border-red-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-amber-500/50 border border-amber-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-emerald-500/50 border border-emerald-500/50"></div>
-          </div>
-          <span className="text-xs text-emerald-500/70 tracking-widest ml-2">SYSTEM ACCESS REQUEST</span>
+      <div className="relative z-10 w-full max-w-sm p-8 bg-[#0a0a0a] border border-neutral-800 shadow-2xl rounded-sm">
+        <div className="flex items-center gap-3 mb-8 pb-4 border-b border-neutral-800">
+          <div className="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse"></div>
+          <span className="text-xs text-neutral-400 uppercase tracking-widest">Access Request</span>
         </div>
 
-        <div className="space-y-6">
-          <div className="text-sm">
+        <div className="space-y-8">
+          <div className="text-[13px] text-neutral-500 space-y-1">
             <motion.p
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="mb-2"
             >
-              <span className="text-white">Connecting...</span> [OK]
+              Establishing secure connection...
             </motion.p>
             <motion.p
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
             >
-              <span className="text-white">Establishing secure link...</span> [OK]
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1 }}
-              className="text-white mb-2"
-            >
-              Please select your preferred communication protocol:
+              Please verify your communication protocol.
             </motion.p>
           </div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="flex flex-col gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col gap-4"
           >
             <button
               onClick={() => onSelectLanguage("ko")}
-              className="group relative w-full p-4 border border-emerald-500/50 rounded bg-emerald-950/20 hover:bg-emerald-500/10 transition-all overflow-hidden"
+              className="group relative w-full px-4 py-3 border border-neutral-800 bg-neutral-900/50 hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all text-left flex justify-between items-center"
             >
-              <div className="absolute inset-0 bg-emerald-400/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-              <div className="relative flex justify-between items-center">
-                <span className="font-bold text-emerald-400 group-hover:text-emerald-300 shadow-emerald-500/50 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]">한국어 (Korean)</span>
-                <span className="text-xs opacity-50 font-mono group-hover:opacity-100 transition-opacity">PROTOCOL_KO</span>
-              </div>
+              <span className="text-sm font-medium text-neutral-300 group-hover:text-emerald-400 transition-colors">한국어</span>
+              <span className="text-[10px] text-neutral-600 group-hover:text-emerald-500/50 transition-colors">KO_KR</span>
             </button>
             <button
               onClick={() => onSelectLanguage("en")}
-              className="group relative w-full p-4 border border-emerald-500/50 rounded bg-emerald-950/20 hover:bg-emerald-500/10 transition-all overflow-hidden"
+              className="group relative w-full px-4 py-3 border border-neutral-800 bg-neutral-900/50 hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all text-left flex justify-between items-center"
             >
-              <div className="absolute inset-0 bg-emerald-400/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-              <div className="relative flex justify-between items-center">
-                <span className="font-bold text-emerald-400 group-hover:text-emerald-300 shadow-emerald-500/50 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]">English</span>
-                <span className="text-xs opacity-50 font-mono group-hover:opacity-100 transition-opacity">PROTOCOL_EN</span>
-              </div>
+              <span className="text-sm font-medium text-neutral-300 group-hover:text-emerald-400 transition-colors">English</span>
+              <span className="text-[10px] text-neutral-600 group-hover:text-emerald-500/50 transition-colors">EN_US</span>
             </button>
           </motion.div>
         </div>
