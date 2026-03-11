@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { motion } from "framer-motion";
 
 interface NewsDetail {
@@ -34,7 +35,7 @@ export default function NewsDetailPage() {
       setLoading(true);
       setError(false);
       try {
-        const res = await fetch(`/api/news/${slug}?lang=${locale}`);
+        const res = await fetch(`/api/news/${encodeURIComponent(slug)}?lang=${locale}`);
         if (res.ok) {
           const data = await res.json();
           setNews(data);
@@ -146,7 +147,28 @@ export default function NewsDetailPage() {
                   hr: () => (
                     <hr className="border-neutral-800 my-8" />
                   ),
+                  table: ({ children }) => (
+                    <div className="overflow-x-auto my-8 border border-neutral-800 rounded-lg">
+                      <table className="w-full text-left border-collapse text-[14px]">{children}</table>
+                    </div>
+                  ),
+                  thead: ({ children }) => (
+                    <thead className="bg-[#050505] text-emerald-400 border-b border-emerald-900/30">{children}</thead>
+                  ),
+                  tbody: ({ children }) => (
+                    <tbody className="divide-y divide-neutral-800/50 bg-neutral-900/10">{children}</tbody>
+                  ),
+                  tr: ({ children }) => (
+                    <tr className="hover:bg-neutral-800/30 transition-colors">{children}</tr>
+                  ),
+                  th: ({ children }) => (
+                    <th className="px-5 py-4 font-semibold font-mono text-xs uppercase tracking-wider">{children}</th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="px-5 py-4 text-neutral-300">{children}</td>
+                  ),
                 }}
+                remarkPlugins={[remarkGfm]}
               >
                 {news.content}
               </ReactMarkdown>

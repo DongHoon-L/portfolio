@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Kor/2026-03-11 뉴스 정리.md",
+                "file": "Kor/20260311_kr.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-11 뉴스 정리"
+              "title": "20260311_kr"
             }
           }
         ]
@@ -184,5 +184,8 @@
     }
   },
   "active": "582273af4283aa87",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Eng/20260311_en.md",
+    "Kor/20260311_kr.md"
+  ]
 }
