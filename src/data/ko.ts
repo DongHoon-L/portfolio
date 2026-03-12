@@ -1,9 +1,15 @@
 export const educationDataKo = [
   {
-    date: "2021 - 현재",
+    date: "2026 - 현재",
     school: "UNSW Sydney",
     major: "Advanced Computer Science (Security Engineering)",
-    description: "보안 아키텍처, 시스템 무결성 및 제로 트러스트 모델에 집중. 높은 학점(High Distinction) 유지 중."
+    description: "제로 트러스트 모델 및 복잡한 인프라 보안 설계를 위한 심화 보안 엔지니어링 과정 이수 중."
+  },
+  {
+    date: "2021 - 2025",
+    school: "Stony Brook University",
+    major: "Technology System Management (기술경영학과)",
+    description: "IT 시스템 관리 및 기술 전략 수립을 위한 기초 역량 습득."
   }
 ];
 

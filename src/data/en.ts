@@ -1,9 +1,15 @@
 export const educationDataEn = [
   {
-    date: "2021 - Present",
+    date: "2026 - Present",
     school: "UNSW Sydney",
     major: "Advanced Computer Science (Security Engineering)",
-    description: "Focusing on security architectures, system integrity, and Zero Trust models. Maintaining High Distinction average."
+    description: "Completing advanced security engineering courses for Zero Trust models and complex infrastructure security design."
+  },
+  {
+    date: "2021 - 2025",
+    school: "Stony Brook University",
+    major: "Technology System Management",
+    description: "Acquired foundational skills for IT system management and technology strategy formulation."
   }
 ];
 

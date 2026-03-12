@@ -5,6 +5,7 @@ import Link from "next/link";
 // import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import LanguageGate from "@/components/LanguageGate";
+import SideNav from "@/components/SideNav";
 import { ko } from "@/locales/ko";
 import { en } from "@/locales/en";
 import { educationDataKo, certDataKo, projectDataKo } from "@/data/ko";
@@ -96,6 +97,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="contents"
           >
+            <SideNav />
+
             {/* 배경 그리드 효과 (보안 아키텍처 느낌) */}
             <div className="fixed inset-0 z-0 pointer-events-none">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_2px,transparent_2px),linear-gradient(90deg,rgba(16,185,129,0.03)_2px,transparent_2px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_20%,transparent_100%)]"></div>
@@ -128,8 +131,9 @@ export default function Home() {
 
             <main className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20">
               
-              {/* 2. Hero Section */}
+              {/* 2. Hero Section (About) */}
               <motion.section 
+                id="about"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
@@ -185,6 +189,7 @@ export default function Home() {
                 
                 {/* 4-1. Education (Vertical Timeline) */}
                 <motion.section
+                  id="education"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
@@ -209,6 +214,7 @@ export default function Home() {
 
                 {/* 4-2. Certifications (3x2 Grid) */}
                 <motion.section
+                  id="certification"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
@@ -236,6 +242,7 @@ export default function Home() {
 
                 {/* 4-3. Projects (Featured Card Layout) */}
                 <motion.section
+                  id="projects"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.1 }}
@@ -292,6 +299,7 @@ export default function Home() {
 
                 {/* 4-4. News (Minimalist List Style) */}
                 <motion.section
+                  id="news"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
@@ -317,7 +325,6 @@ export default function Home() {
                         <div className="pt-8">
                           <Link href="/news" className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-wider">
                             {t.news.viewAll} 
-                            <span className="text-lg leading-none transform group-hover:translate-x-1 transition-transform">→</span>
                           </Link>
                         </div>
                       </>
