@@ -124,11 +124,11 @@ export default function NewsDetailPage() {
             transition={{ duration: 0.5 }}
           >
             {/* Header */}
-            <div className="mb-10 pb-6 border-b border-neutral-800">
-              <div className="text-xs text-emerald-500/70 font-mono mb-3">{news.date}</div>
-              <h1 className="text-2xl md:text-3xl font-bold font-sans tracking-tight leading-snug text-white">
+            <div className="mb-12 pb-8 border-b border-neutral-800 flex flex-col gap-4">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-sans tracking-tight leading-snug text-white">
                 {news.title}
               </h1>
+              <div className="text-sm text-neutral-500 font-mono tracking-wide">{news.date}</div>
             </div>
 
             {/* Markdown Content */}

@@ -34,9 +34,21 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     
     // utf-8 명시
     const content = fs.readFileSync(filePath, { encoding: 'utf8' });
-    const firstLine = content.split('\n')[0];
-    const title = firstLine.replace(/^#\s*/, '').trim() || fileName;
+    const match = content.match(/^(?:#|##)\s+([^#\n\r]+)$/m);
+    const title = match ? match[1].trim() : fileName.replace('.md', '');
+    
+    let cleanContent = content;
+    if (match) {
+      cleanContent = content.replace(match[0], '').replace(/^\s+/, '');
+    }
+
     const stat = fs.statSync(filePath);
+
+    let displayDate = stat.mtime.toISOString().split('T')[0];
+    const dateMatch = fileName.match(/^(\d{4})(\d{2})(\d{2})/);
+    if (dateMatch) {
+      displayDate = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
+    }
     
     // 번역본 존재 여부 확인 로직
     let translationSlug = null;
@@ -62,8 +74,8 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     return NextResponse.json({
       id: slug,
       title,
-      date: stat.mtime.toISOString().split('T')[0],
-      content,
+      date: displayDate,
+      content: cleanContent,
       translationSlug
     });
   } catch (error) {
