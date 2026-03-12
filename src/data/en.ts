@@ -1,4 +1,4 @@
-export const educationDataEn = [
+export const experienceDataEn = [
   {
     date: "2026 - Present",
     school: "UNSW Sydney",

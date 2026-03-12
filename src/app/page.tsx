@@ -8,8 +8,8 @@ import LanguageGate from "@/components/LanguageGate";
 import SideNav from "@/components/SideNav";
 import { ko } from "@/locales/ko";
 import { en } from "@/locales/en";
-import { educationDataKo, certDataKo, projectDataKo } from "@/data/ko";
-import { educationDataEn, certDataEn, projectDataEn } from "@/data/en";
+import { experienceDataKo, certDataKo, projectDataKo } from "@/data/ko";
+import { experienceDataEn, certDataEn, projectDataEn } from "@/data/en";
 
 interface NewsItem {
   id: string;
@@ -66,7 +66,7 @@ export default function Home() {
   if (isInitializing) return null;
 
   const t = locale === "ko" ? ko : en;
-  const eduData = locale === "ko" ? educationDataKo : educationDataEn;
+  const expData = locale === "ko" ? experienceDataKo : experienceDataEn;
   const certData = locale === "ko" ? certDataKo : certDataEn;
   const projData = locale === "ko" ? projectDataKo : projectDataEn;
 
@@ -138,7 +138,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="grid md:grid-cols-2 gap-12 items-center mb-32"
+                className="grid md:grid-cols-2 gap-12 items-center mb-32 scroll-mt-32"
               >
                 <div className="order-2 md:order-1">
                   <p className="font-mono text-emerald-500 text-sm mb-4 tracking-tight">{t.hero.tagline}</p>
@@ -187,26 +187,27 @@ export default function Home() {
               {/* 4. Sections Container */}
               <div className="flex flex-col gap-32 mb-20">
                 
-                {/* 4-1. Education (Vertical Timeline) */}
+                {/* 4-1. Experience (Vertical Timeline) */}
                 <motion.section
-                  id="education"
+                  id="experience"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   variants={sectionVariants}
+                  className="scroll-mt-32"
                 >
                   <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
-                    {t.education.title}
+                    {t.experience.title}
                   </h2>
                   <div className="relative border-l border-emerald-500/30 ml-3 pl-8 py-2 space-y-12">
-                    {eduData.map((edu, idx) => (
+                    {expData.map((exp, idx) => (
                       <div key={idx} className="relative group">
                         {/* Timeline dot */}
                         <div className="absolute -left-[37px] top-1.5 w-3 h-3 rounded-full bg-[#050505] border-2 border-emerald-500 group-hover:bg-emerald-500 transition-colors shadow-[0_0_10px_rgba(52,211,153,0.3)]"></div>
-                        <div className="text-sm font-mono text-emerald-500 mb-2">{edu.date}</div>
-                        <h3 className="text-xl font-bold font-sans text-white tracking-tight mb-1">{edu.school}</h3>
-                        <p className="text-base text-neutral-300 font-sans mb-3">{edu.major}</p>
-                        <p className="text-sm text-neutral-500 font-sans leading-relaxed">{edu.description}</p>
+                        <div className="text-sm font-mono text-emerald-500 mb-2">{exp.date}</div>
+                        <h3 className="text-xl font-bold font-sans text-white tracking-tight mb-1">{exp.school}</h3>
+                        <p className="text-base text-neutral-300 font-sans mb-3">{exp.major}</p>
+                        <p className="text-sm text-neutral-500 font-sans leading-relaxed">{exp.description}</p>
                       </div>
                     ))}
                   </div>
@@ -219,6 +220,7 @@ export default function Home() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   variants={sectionVariants}
+                  className="scroll-mt-32"
                 >
                   <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
                     {t.certifications.title}
@@ -247,6 +249,7 @@ export default function Home() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.1 }}
                   variants={sectionVariants}
+                  className="scroll-mt-32"
                 >
                   <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-12 underline decoration-emerald-500/20 underline-offset-8">
                     {t.projects.title}
@@ -304,6 +307,7 @@ export default function Home() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   variants={sectionVariants}
+                  className="scroll-mt-32"
                 >
                   <h2 className="font-mono text-xs uppercase tracking-[0.4em] text-emerald-500 mb-8 underline decoration-emerald-500/20 underline-offset-8">
                     {t.news.title}
@@ -316,8 +320,8 @@ export default function Home() {
                             <div className="text-sm font-mono text-emerald-500 w-36 shrink-0 mb-2 md:mb-0 transition-opacity opacity-80 group-hover:opacity-100">
                               {news.date}
                             </div>
-                            <h3 className="text-lg font-sans font-medium text-neutral-200 group-hover:text-emerald-400 transition-colors relative inline-block">
-                              <span className="relative z-10">{news.title}</span>
+                            <h3 className="text-lg font-sans font-medium text-neutral-200 group-hover:text-emerald-400 transition-colors relative flex-1 min-w-0">
+                              <span className="relative z-10 truncate block w-full">{news.title}</span>
                               <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
                             </h3>
                           </Link>

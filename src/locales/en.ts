@@ -20,8 +20,8 @@ export const en = {
     command: "whoami",
     output: "Majoring in **Advanced Computer Science (Security Engineering)** at UNSW Sydney, <br />I research and design **security architectures** that ensure system integrity and availability. <br />Currently enhancing technical proficiency through a practical project-focused bootcamp in South Korea."
   },
-  education: {
-    title: "Education",
+  experience: {
+    title: "Experience",
   },
   certifications: {
     title: "Certifications",

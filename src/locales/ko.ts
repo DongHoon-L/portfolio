@@ -20,8 +20,8 @@ export const ko = {
     command: "whoami",
     output: "UNSW Sydney에서 **Advanced Computer Science(Security Engineering)**를 전공하고 있으며, <br />시스템 무결성과 가용성을 보장하는 **보안 아키텍처**를 연구하고 설계합니다. <br />현재 한국에서 실무 프로젝트 중심의 부트캠프를 통해 기술적 완성도를 높이고 있습니다."
   },
-  education: {
-    title: "Education",
+  experience: {
+    title: "Experience",
   },
   certifications: {
     title: "Certifications",

@@ -8,7 +8,7 @@ export default function SideNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "education", "certification", "projects", "news"];
+      const sections = ["about", "experience", "certification", "projects", "news"];
       let current = "";
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -36,7 +36,7 @@ export default function SideNav() {
 
   const navItems = [
     { id: "about", icon: User, label: "About" },
-    { id: "education", icon: GraduationCap, label: "Education" },
+    { id: "experience", icon: GraduationCap, label: "Experience" },
     { id: "certification", icon: ShieldCheck, label: "Certification" },
     { id: "projects", icon: FolderGit2, label: "Projects" },
     { id: "news", icon: Rss, label: "News" },
