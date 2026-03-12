@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     const files = fs.readdirSync(newsDir).filter(file => file.endsWith('.md'));
     const newsList = files.map(file => {
       const content = fs.readFileSync(path.join(newsDir, file), { encoding: 'utf8' });
-      const match = content.match(/^#\s+(.+)$/m);
+      const match = content.match(/^(?:#|##)\s+([^#\n\r]+)$/m);
       const title = match ? match[1].trim() : file.replace('.md', '');
       const stat = fs.statSync(path.join(newsDir, file));
       

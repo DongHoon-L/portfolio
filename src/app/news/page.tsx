@@ -110,11 +110,11 @@ export default function NewsListPage() {
                     href={`/news/${news.id}`}
                     className="block bg-neutral-900/40 border border-neutral-800 p-5 rounded-lg border-l-2 border-l-emerald-500/50 hover:bg-neutral-800/30 hover:translate-x-1 transition-all group"
                   >
-                    <div className="flex justify-between items-start">
-                      <h2 className="font-sans font-semibold text-neutral-200 group-hover:text-emerald-400 transition-colors leading-relaxed">
+                    <div className="flex justify-between items-start overflow-hidden">
+                      <h2 className="font-sans font-semibold text-neutral-200 group-hover:text-emerald-400 transition-colors leading-relaxed truncate pr-4">
                         {news.title}
                       </h2>
-                      <span className="text-[10px] font-mono text-emerald-500/50 whitespace-nowrap ml-4 mt-1">
+                      <span className="text-[10px] font-mono text-emerald-500/50 whitespace-nowrap ml-4 mt-1 shrink-0">
                         {news.date}
                       </span>
                     </div>
